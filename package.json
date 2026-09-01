@@ -1,0 +1,29 @@
+{
+  "name": "higher-order-mcp",
+  "version": "0.1.0",
+  "description": "Renameable, OAuth-capable, stateless higher-order MCP server template for Cloudflare Workers (Deploy to Cloudflare).",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "node scripts/deploy.mjs",
+    "test": "vitest run",
+    "check": "tsc --noEmit && vitest run",
+    "types": "wrangler types env.d.ts --include-runtime false"
+  },
+  "dependencies": {
+    "@cloudflare/workers-oauth-provider": "0.10.3",
+    "@modelcontextprotocol/client": "2.0.0",
+    "@modelcontextprotocol/server": "2.0.0",
+    "agents": "0.22.0",
+    "hono": "4.13.5",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "latest",
+    "@cloudflare/workers-types": "latest",
+    "typescript": "7.0.2",
+    "vitest": "latest",
+    "wrangler": "4.128.0"
+  }
+}
