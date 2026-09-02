@@ -15,7 +15,7 @@ One Worker that speaks MCP (2026-07-28 + the 2025 lane claude.ai still uses), do
 
 ## Deploy in ten minutes
 
-1. Click the button. On the setup page: **Project name** is the Worker name (name #1, it becomes the hostname); leave the D1 database on "Create new"; set `OWNER_PASSPHRASE` (generate one with `openssl rand -base64 24`); optionally set `MCP_SERVER_NAME`, for example `thor-memory` (name #2 — when empty the first label of the hostname is used).
+1. Click the button. On the setup page: **Project name** is the Worker name (name #1, it becomes the hostname); set the D1 database to **"+ Create new"** (the page pre-selects an existing database whose name matches, which would share its data); type a real `OWNER_PASSPHRASE` (the field is empty on purpose — generate one with `openssl rand -base64 24`); optionally set `MCP_SERVER_NAME`, for example `thor-memory` (name #2 — when empty the first label of the hostname is used). The deploy command is auto-detected as `npm run deploy`.
 2. Wait for the build. `npm run deploy` runs `wrangler deploy` and then applies the D1 migrations. Open `https://<worker>.<you>.workers.dev/`.
 3. The landing page prints the exact commands for *this* deploy. Copy the two Claude Code lines and click **Add to claude.ai**. Both ask for your passphrase once.
 
