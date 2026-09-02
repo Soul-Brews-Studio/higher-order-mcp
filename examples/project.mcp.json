@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "thor-memory": { "type": "http", "url": "${HOMCP_URL:-https://odin-memory.example.workers.dev/mcp}" }
+  }
+}

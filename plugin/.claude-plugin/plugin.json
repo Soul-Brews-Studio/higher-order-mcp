@@ -1,0 +1,14 @@
+{
+  "name": "homcp",
+  "version": "0.1.0",
+  "description": "Connect a deployed homcp server (higher-order MCP on Cloudflare) to Claude Code. Tools appear as mcp__plugin_homcp_homcp__<tool>.",
+  "author": { "name": "Soul Brews Studio" },
+  "userConfig": {
+    "server_url": {
+      "type": "string",
+      "title": "homcp server URL",
+      "description": "Your deployment's MCP endpoint, e.g. https://thor-memory.example.workers.dev/mcp",
+      "required": true
+    }
+  }
+}

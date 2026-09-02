@@ -1,0 +1,7 @@
+{
+  "name": "homcp",
+  "owner": { "name": "Soul Brews Studio" },
+  "plugins": [
+    { "name": "homcp", "source": "./plugin", "description": "Connect a homcp deployment to Claude Code" }
+  ]
+}

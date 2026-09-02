@@ -1,0 +1,6 @@
+# The Deploy to Cloudflare button prompts for every UNCOMMENTED line here as a required secret. Never commit real values.
+# Owner passphrase: typed on the OAuth approval page (claude.ai / Claude Code connect) and the /owner console. Generate: openssl rand -base64 24
+OWNER_PASSPHRASE=replace-with-a-long-random-passphrase
+# Optional static bearer for headless clients (cron, CI, Codex). Keep commented so the button does not require it;
+# enable later with: wrangler secret put MCP_API_TOKEN
+# MCP_API_TOKEN=

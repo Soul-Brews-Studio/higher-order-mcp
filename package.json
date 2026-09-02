@@ -7,9 +7,14 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "node scripts/deploy.mjs",
+    "deploy:dry-run": "node scripts/deploy.mjs --dry-run",
+    "db:migrate:local": "wrangler d1 migrations apply DB --local",
+    "db:migrate:remote": "wrangler d1 migrations apply DB --remote",
     "test": "vitest run",
-    "check": "tsc --noEmit && vitest run",
-    "types": "wrangler types env.d.ts --include-runtime false"
+    "typecheck": "tsc --noEmit",
+    "check": "node scripts/check-names.mjs && tsc --noEmit && vitest run",
+    "types": "wrangler types env.d.ts --include-runtime false",
+    "mcp:connect": "./scripts/connect-mcp.sh"
   },
   "dependencies": {
     "@cloudflare/workers-oauth-provider": "0.10.3",
@@ -20,10 +25,19 @@
     "zod": "4.5.4"
   },
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "latest",
-    "@cloudflare/workers-types": "latest",
+    "@cloudflare/vitest-pool-workers": "0.22.0",
+    "@cloudflare/workers-types": "5.20260901.1",
     "typescript": "7.0.2",
-    "vitest": "latest",
+    "vitest": "4.1.11",
     "wrangler": "4.128.0"
+  },
+  "cloudflare": {
+    "bindings": {
+      "OWNER_PASSPHRASE": { "description": "Required. The passphrase you type on the OAuth approval page when claude.ai or Claude Code connects, and to open the owner console at /owner. Generate with: `openssl rand -base64 24`. MCP clients never see it; they receive revocable OAuth tokens." },
+      "MCP_API_TOKEN": { "description": "Optional. A long random static bearer for headless clients (cron, CI, Codex without OAuth). Leave unset to keep OAuth as the only door; add later with `wrangler secret put MCP_API_TOKEN`." },
+      "MCP_SERVER_NAME": { "description": "Optional. What this deployment calls itself (serverInfo.name, approval-page and landing-page copy, default key in install snippets), e.g. `thor-memory`. Letters, digits, `-` and `_` only. Empty = derive from the hostname. Can be changed later without redeploying via the `set_identity` tool or the owner console." },
+      "OAUTH_KV": { "description": "Cloudflare creates and binds this KV namespace automatically. Stores OAuth clients, grants, hashed tokens, owner-console sessions and rate-limit counters." },
+      "DB": { "description": "Cloudflare creates and binds this D1 database automatically. Stores the tool registry (defined tools, per-deploy and per-client overrides, upstream MCP servers, settings, audit) and memories. Migrations run from the deploy script by binding name." }
+    }
   }
 }
